@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Management System</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<style>
+</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{/students}">Systéme Gestion Etudiant</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/students}">Gestion
+					Etudiant</a></li>
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/registration}">Inscription et Connexion Etudiant</a></li>
+			<li sec:authorize="isAuthenticated()" class="nav-item active"><a
+				class="nav-link" href="#">Bienvenu <span
+					sec:authentication="principal.username">User </span>
+			</a></li>
+			<li sec:authorize="isAuthenticated()" class="nav-item active"><a
+				class="nav-link" th:href="@{/logout}">Logout </a></li>
+
+		</ul>
+	</nav>
+	<br>
+
+
+	<div class="container">
+		<div class="row">
+			<h1>Liste des Etudiants</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3">
+					Ajouter un étudiant</a>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Prénom Etudiant</th>
+					<th>Nom Etudiant</th>
+
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${students.empty}">
+					<td colspan="3">Aucun étudiant en base de données</td>
+				</tr>
+				<tr th:each="student:${students}">
+					<td><span th:text="${student.firstName}"> Prénom </span></td>
+					<td><span th:text="${student.lastName}"> Nom </span></td>
+
+					<td><a th:href="@{/students/update/{id}(id=${student.id})}"><button
+								class="btn btn-primary">Modifier</button></a> <a
+						th:href="@{/students/delete/{id}(id=${student.id})}"><button
+								class="btn btn-danger"  sec:authorize="hasRole('ADMIN')">Supprimer</button></a> <a
+						th:href="@{/students/detail/{id}(id=${student.id})}"><button
+								class="btn btn-info">Détail</button></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<footer class="footer footer-expand-sm bg-dark footer-dark">
+		<div class="container">
+			<div class="text-center" col-lg-3>
+				<span style="color: white">All rights Reserved 2022
+					@tdsiCoding. Auteur ""barthélemy diaz""</span>
+			</div>
+		</div>
+	</footer>
+
+</body>
+</html>

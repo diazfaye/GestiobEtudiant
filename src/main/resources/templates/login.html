@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Management System</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{/students}">Systéme Gestion Etudiant</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/students}">Gestion
+					Etudiant</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/}">Inscription
+					et Connexion Etudiant</a></li>
+		</ul>
+	</nav>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-md-6 col-md-offset-3 container justify-content-center card">
+				<div class="text-center">
+					<img th:src="@{/img/admin.png}" />
+				</div>
+
+				<h1 class="text-center">Page connexion utilisateur</h1>
+
+				<div class="card-body">
+					<form th:action="@{/login}" method="POST">
+						<!-- message error -->
+						<div th:if="${param.error}">
+							<div class="alert alert-info">Nom d'utilisateur ou mot de
+								passe invalide.</div>
+						</div>
+
+						<!--logout message -->
+						<div th:if="${param.logout}">
+							<div class="alert alert-info">Vous étes bien déconnectés de
+								l'application Systéme Gestion Etudiant.</div>
+						</div>
+
+						<div class="form-group">
+							<label for="username">Nom d'utilisateur</label>: <input
+								type="text" id="username" name="username" autofocus="autofocus"
+								class="form-control" placeholder="Entrer un Email ID" />
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>: <input type="password"
+								id="password" name="password" autofocus="autofocus"
+								class="form-control" placeholder="Entrer un passe phrase" />
+						</div>
+
+						<div class="form-group">
+							<input type="submit" name="login-submit" id="login-submit"
+								class="form-control btn btn-primary" value="Connecter" />
+
+						</div>
+					</form>
+				</div>
+				<div class="form-group">
+					<span>Nouveau utilisateur<a href="/"
+						th:href="@{/registration} "> Registrer ici</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

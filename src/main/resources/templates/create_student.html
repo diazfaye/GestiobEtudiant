@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Management System</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{/students}">Systéme Gestion Etudiant</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/students}">Gestion
+					Etudiant</a></li>
+			<li sec:authorize="isAuthenticated()" class="nav-item active"><a
+				class="nav-link" href="#">Bienvenu <span
+					sec:authentication="principal.username">User </span>
+			</a></li>
+			<li sec:authorize="isAuthenticated()" class="nav-item active"><a
+				class="nav-link" th:href="@{/logout}">Logout </a></li>
+
+		</ul>
+	</nav>
+	<br>
+	<br>
+
+	<div class="container">
+
+		<div class="row"  sec:authorize="hasRole('USER')">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<div class="text-center">
+					<img th:src="@{/img/admin.png}" />
+				</div>
+				<h1 class="text-center">Créer un nouvel étudiant</h1>
+				<div class="card-body">
+					<form th:action="@{/students}" th:object="${student}" method="POST">
+						<div class="form-group">
+							<label>Prenom etudiant</label> <input type="text"
+								name="firstName" th:field="*{firstName}" class="form-control"
+								placeholder="Entrer un prenom">
+						</div>
+
+						<div class="form-group">
+							<label>Nom etudiant</label> <input type="text" name="lastName"
+								th:field="*{lastName}" class="form-control"
+								placeholder="Entrer un nom">
+						</div>
+
+						<div class="form-group">
+							<label>Email etudiant</label> <input type="text" name="email"
+								th:field="*{email}" class="form-control"
+								placeholder="Entrer un email">
+						</div>
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
